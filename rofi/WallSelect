@@ -1,0 +1,56 @@
+#!/bin/bash
+export PATH="$HOME/.local/bin:$PATH"
+# Kiểm tra gói cần thiết (chỉnh lại cho Fedora dùng dnf)
+for app in xdpyinfo magick dunstify; do
+    if ! command -v "$app" &>/dev/null; then
+        dunstify "Missing package" "Please install the '$app' package to continue." -u critical
+        exit 1
+    fi
+done
+
+# Thư mục chứa ảnh nền
+wall_dir="${HOME}/wallpaper"
+cacheDir="${HOME}/.cache/$(whoami)/walls"
+
+# Lấy độ phân giải để tính kích thước icon
+monitor_res=$(xdpyinfo | awk '/dimensions/{print $2}' | cut -d 'x' -f1)
+monitor_scale=$(xdpyinfo | awk '/resolution/{print $2}' | cut -d 'x' -f1)
+monitor_res=$(( monitor_res * 17 / monitor_scale ))
+
+# Override giao diện rofi
+rofi_override="element-icon{size:${monitor_res}px;border-radius:0px;}"
+rofi_command="rofi -dmenu -theme ${HOME}/.config/rofi/WallSelect.rasi -theme-str ${rofi_override}"
+
+# Tạo thư mục cache nếu chưa có
+mkdir -p "${cacheDir}"
+
+# Tạo ảnh preview (nếu chưa có) cho rofi
+for img in "$wall_dir"/*.{jpg,jpeg,png,webp}; do
+    [ -f "$img" ] || continue
+    fname=$(basename "$img")
+    if [ ! -f "${cacheDir}/${fname}" ]; then
+        magick "$img" -resize 500x500^ -gravity center -extent 500x500 "${cacheDir}/${fname}"
+    fi
+done
+
+# Mở trình chọn hình nền
+wall_selection=$(find "${wall_dir}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -exec basename {} \; | sort | while read -r A ; do
+    echo -en "$A\x00icon\x1f${cacheDir}/$A\n"
+done | $rofi_command)
+
+# Nếu có chọn
+if [[ -n "$wall_selection" ]]; then
+    # Đường dẫn đầy đủ
+    selected_wall="${wall_dir}/${wall_selection}"
+    # Gọi pywal để sinh màu
+    # wal -i "$selected_wall"
+    # Đặt hình nền
+    # feh --bg-fill "$selected_wall"
+    # feh --bg-scale "$(cat ~/.cache/wal/wal)"
+    wal -i "$selected_wall" && feh --bg-scale "$(cat ~/.cache/wal/wal)"
+    ~/.config/rofi/yazi.sh
+    # Chạy lệnh change_color.sh để thay đổi màu GTK
+    ~/oomox-gtk-theme/change_color.sh -o my-wal-theme ~/.cache/wal/colors-oomox
+    # Dunst
+    ~/.config/dunst/update-theme.sh
+fi

@@ -1,0 +1,38 @@
+# Bỏ qua tất cả các file và thư mục
+*
+
+# Cho phép các thư mục cụ thể và toàn bộ nội dung bên trong
+!dunst/
+!dunst/**
+!picom/
+!picom/**
+!wal/
+!wal/**
+!gtk-3.0/
+!gtk-3.0/**
+!gtk-4.0/
+!gtk-4.0/**
+!i3/
+!i3/**
+!kitty/
+!kitty/**
+!fastfetch/
+!fastfetch/**
+!nvim/
+!nvim/**
+!yazi/
+!yazi/**
+!rofi/
+!rofi/**
+!tmux/
+!tmux/**
+!polybar/
+!polybar/**
+
+# Cho phép các file cụ thể
+!README.md
+!starship.toml
+
+# Đảm bảo .gitignore được theo dõi
+!.gitignore
+

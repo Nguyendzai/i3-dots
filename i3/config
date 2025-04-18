@@ -1,0 +1,295 @@
+# Thiết lập phím điều khiển chính
+set $mod Mod4
+
+# Thiết lập font chữ
+font pango:Hack 9
+
+# Thiết lập phím để bật chế độ floating
+floating_modifier $mod
+
+# Thiết lập khoảng cách giữa các cửa sổ
+gaps inner 5
+gaps outer 1
+
+# Định nghĩa biến cho terminal
+set $term kitty
+
+# Mở terminal mặc định
+bindsym $mod+Return exec $term
+
+# Mở terminal ở chế độ floating
+bindsym $mod+Shift+Return exec kitty --name floating
+
+# Quy tắc để terminal "floating" bật chế độ float
+for_window [class="kitty" instance="floating"] floating enable
+
+# Di chuyển cửa sổ đến giữa màn hình
+bindsym $mod+c move position center
+
+# Đóng cửa sổ đang focus
+bindsym $mod+q kill
+
+# Mở trình khởi chạy ứng dụng (rofi)
+bindsym $mod+d exec "rofi -show combi -modi window,run,drun,combi -combi-modi window,run,drun"
+
+# Di chuyển focus sang trái
+bindsym $mod+Left focus left
+
+# Di chuyển focus xuống dưới
+bindsym $mod+Down focus down
+
+# Di chuyển focus lên trên
+bindsym $mod+Up focus up
+
+# Di chuyển focus sang phải
+bindsym $mod+Right focus right
+
+# Di chuyển cửa sổ sang trái
+bindsym $mod+Shift+Left move left
+
+# Di chuyển cửa sổ xuống dưới
+bindsym $mod+Shift+Down move down
+
+# Di chuyển cửa sổ lên trên
+bindsym $mod+Shift+Up move up
+
+# Di chuyển cửa sổ sang phải
+bindsym $mod+Shift+Right move right
+
+# Chia cửa sổ theo chiều ngang
+bindsym $mod+h split h
+
+# Chia cửa sổ theo chiều dọc
+bindsym $mod+v split v
+
+# Chuyển đổi kiểu chia cửa sổ
+bindsym $mod+t split toggle
+
+# Chuyển sang chế độ toàn màn hình
+bindsym $mod+f fullscreen toggle
+
+# Chuyển layout sang stacking
+bindsym $mod+s layout stacking
+
+# Chuyển layout sang tabbed
+bindsym $mod+w layout tabbed
+
+# Chuyển đổi layout
+bindsym $mod+e layout toggle split
+
+# Bật/tắt chế độ sticky
+bindsym $mod+Shift+w sticky toggle
+
+# Chuyển đổi giữa tiling và floating
+bindsym $mod+Shift+space floating toggle
+
+# Chuyển focus giữa tiling và floating
+bindsym $mod+space focus mode_toggle
+
+# Focus vào container cha
+bindsym $mod+a focus parent
+
+# Mở clipboard manager (greenclip)
+bindsym $mod+Shift+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+# Bật/tắt polybar
+bindsym $mod+b exec --no-startup-id ~/.config/polybar/toggle_polybar.sh
+
+# Bật/tắt picom
+bindsym $mod+g exec --no-startup-id ~/.config/picom/toggle-picom.sh
+
+# Chọn wallpaper (pywal)
+bindsym $mod+p exec --no-startup-id "bash -c 'export PATH=/usr/bin:/usr/local/bin:$PATH; ~/.config/rofi/WallSelect'"
+
+# Hiển thị danh sách phím tắt
+bindsym $mod+slash exec --no-startup-id python3 ~/.config/i3/scripts/i3-hint.py 
+
+# Định nghĩa tên workspace
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Chuyển sang workspace 1
+bindsym $mod+1 workspace number $ws1
+
+# Chuyển sang workspace 2
+bindsym $mod+2 workspace number $ws2
+
+# Chuyển sang workspace 3
+bindsym $mod+3 workspace number $ws3
+
+# Chuyển sang workspace 4
+bindsym $mod+4 workspace number $ws4
+
+# Chuyển sang workspace 5
+bindsym $mod+5 workspace number $ws5
+
+# Chuyển sang workspace 6
+bindsym $mod+6 workspace number $ws6
+
+# Chuyển sang workspace 7
+bindsym $mod+7 workspace number $ws7
+
+# Chuyển sang workspace 8
+bindsym $mod+8 workspace number $ws8
+
+# Chuyển sang workspace 9
+bindsym $mod+9 workspace number $ws9
+
+# Chuyển sang workspace 10
+bindsym $mod+0 workspace number $ws10
+
+# Di chuyển cửa sổ đến workspace 1
+bindsym $mod+Shift+1 move container to workspace number $ws1
+
+# Di chuyển cửa sổ đến workspace 2
+bindsym $mod+Shift+2 move container to workspace number $ws2
+
+# Di chuyển cửa sổ đến workspace 3
+bindsym $mod+Shift+3 move container to workspace number $ws3
+
+# Di chuyển cửa sổ đến workspace 4
+bindsym $mod+Shift+4 move container to workspace number $ws4
+
+# Di chuyển cửa sổ đến workspace 5
+bindsym $mod+Shift+5 move container to workspace number $ws5
+
+# Di chuyển cửa sổ đến workspace 6
+bindsym $mod+Shift+6 move container to workspace number $ws6
+
+# Di chuyển cửa sổ đến workspace 7
+bindsym $mod+Shift+7 move container to workspace number $ws7
+
+# Di chuyển cửa sổ đến workspace 8
+bindsym $mod+Shift+8 move container to workspace number $ws8
+
+# Di chuyển cửa sổ đến workspace 9
+bindsym $mod+Shift+9 move container to workspace number $ws9
+
+# Di chuyển cửa sổ đến workspace 10
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Nạp lại cấu hình i3
+bindsym $mod+Shift+c reload
+
+# Khởi động lại i3
+bindsym $mod+Shift+r restart
+
+# Thoát i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Chế độ thay đổi kích thước cửa sổ
+mode "resize" {
+    # Thu nhỏ chiều rộng
+    bindsym Left resize shrink width 5 px or 5 ppt
+
+    # Mở rộng chiều cao
+    bindsym Down resize grow height 5 px or 5 ppt
+
+    # Thu nhỏ chiều cao
+    bindsym Up resize shrink height 5 px or 5 ppt
+
+    # Mở rộng chiều rộng
+    bindsym Right resize grow width 5 px or 5 ppt
+
+    # Quay lại chế độ mặc định
+    bindsym Return mode "default"
+
+    # Thoát chế độ resize
+    bindsym Escape mode "default"
+
+    # Thoát chế độ resize
+    bindsym $mod+r mode "default"
+}
+
+# Vào chế độ resize
+bindsym $mod+r mode "resize"
+
+# Giảm độ sáng màn hình
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# Tăng độ sáng màn hình
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+
+# Tăng âm lượng
+bindsym XF86AudioRaiseVolume exec "pamixer --increase 5"
+
+# Giảm âm lượng
+bindsym XF86AudioLowerVolume exec "pamixer --decrease 5"
+
+# Tắt/bật âm thanh
+bindsym XF86AudioMute exec "amixer sset Master toggle"
+
+# Mở máy tính (galculator)
+bindsym $mod+Shift+p exec galculator
+
+# Khóa màn hình
+bindsym $mod+l exec "sleep 0.1 && i3lock --color=001419"
+
+# Chụp ảnh màn hình toàn bộ
+bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
+
+# Chụp ảnh cửa sổ hiện tại
+bindsym $mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-current.png"
+
+# Chụp ảnh vùng chọn
+bindsym Shift+Print exec --no-startup-id maim --format=png --select "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-selected.png"
+
+# Chụp ảnh màn hình toàn bộ vào clipboard
+bindsym Ctrl+Print exec --no-startup-id maim --format=png | xclip -selection clipboard -t image/png
+
+# Chụp ảnh cửa sổ hiện tại vào clipboard
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+
+# Chụp ảnh vùng chọn vào clipboard
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
+
+# Khởi chạy polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Thiết lập màu sắc từ Xresources
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# Cấu hình màu sắc cho cửa sổ
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
+
+# Thiết lập workspace mặc định
+exec --no-startup-id "i3-msg 'workspace 1; exec kitty'"
+
+# Cấu hình cửa sổ floating
+for_window [title="Calculator"] floating enable
+for_window [title="Timer"] floating enable
+for_window [class="^.*"] border pixel 1
+for_window [class="librewolf"] border none
+for_window [class="org.mozilla.firefox"] border none
+for_window [class="mpv"] floating enable
+for_window [class="imv"] floating enable
+for_window [class="zenity"] floating enable
+for_window [class="octave-gui"] floating enable
+for_window [class="Matplotlib"] floating enable
+for_window [class="Galculator"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="Thunar"] floating enable
+
+# Cấu hình tự động chạy
+exec xrandr --output HDMI-1 --mode 1920x1080 --rate 144 --scale 1x1
+exec --no-startup-id dunst
+exec --no-startup-id picom
+exec --no-startup-id dex -a -s /etc/xdg/autostart/ ~/.config/autostart/
+exec --no-startup-id /usr/libexec/xfce-polkit
+exec --no-startup-id fcitx5 -d
+exec --no-startup-id greenclip daemon
+exec --no-startup-id xsetroot -cursor_name macOS

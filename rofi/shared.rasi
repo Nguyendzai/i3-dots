@@ -1,0 +1,12 @@
+// Rofi colors for Tokyonight-hypr
+
+* {
+    font: "JetBrainsMono NF Bold 9";  // Giữ nguyên font chữ
+    background: #14151e;              // Màu nền chính (Tokyo Night background)
+    background-alt: #1a1b26E0;        // Màu nền phụ (trong suốt)
+    foreground: #a9b1d6;              // Màu chữ (Tokyo Night foreground)
+    selected: #7aa2f7;                // Màu khi được chọn (Tokyo Night blue)
+    active: #73daca;                  // Màu khi hoạt động (Tokyo Night cyan)
+    urgent: #f7768e;                  // Màu khẩn cấp (Tokyo Night red)
+}
+
