@@ -28,6 +28,10 @@
 !tmux/**
 !polybar/
 !polybar/**
+!qt5ct/
+!qt5ct/**
+!qt6ct/
+!qt6ct/**
 
 # Cho phép các file cụ thể
 !README.md
